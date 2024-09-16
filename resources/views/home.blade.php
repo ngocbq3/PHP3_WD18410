@@ -13,8 +13,24 @@
     <nav>
         <a href="/">Trang chủ</a> |
         <a href="/user/123">User</a> |
-        <a href="{{ route('dashboard') }}">Trang admin</a>
+        <a href="">Trang admin</a> |
+
+        <!--Danh sách category-->
+        @foreach ($categories as $cate)
+            <a href="#">{{ $cate->name }}</a> |
+        @endforeach
     </nav>
+
+    <!--Hiển thị dữ liệu-->
+    @foreach ($posts as $post)
+        <div>
+            <a href="#">
+                <h3>{{ $post->title }}</h3>
+            </a>
+            <p>{{ $post->description }}</p>
+            <hr>
+        </div>
+    @endforeach
 </body>
 
 </html>
