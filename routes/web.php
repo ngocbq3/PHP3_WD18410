@@ -87,3 +87,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [PostController::class, 'home'])->name('page.home');
+Route::get('/category/{id}', [PostController::class, 'list'])->name('page.list');
+Route::get('/detail/{id}', [PostController::class, 'detail'])->name('page.detail');

@@ -1,3 +1,5 @@
 <div>
-    <!-- It is not the man who has too little, but the man who craves more, that is poor. - Seneca -->
+    <h3>{{ $post->title }}</h3>
+    <img src="{{ $post->image }}" width="250" alt="">
+    <p>{{ $post->content }}</p>
 </div>

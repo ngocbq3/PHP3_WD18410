@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use function Ramsey\Uuid\v1;
 
 class PostController extends Controller
 {
@@ -17,10 +16,7 @@ class PostController extends Controller
             ->limit(8)
             ->get();
 
-        //lấy danh mục
-        $categories = DB::table('categories')->get();
-
-        return view('home', compact('posts', 'categories'));
+        return view('home', compact('posts'));
     }
 
     //Hiển thị danh sách bài viết theo danh mục
@@ -31,5 +27,15 @@ class PostController extends Controller
             ->get();
 
         return view('list-post', compact('posts'));
+    }
+
+    //Hiển thị chi tiết bài viết
+    public function detail($id)
+    {
+        $post = DB::table('posts')
+            ->where('id', $id)
+            ->first();
+
+        return view('detail', compact('post'));
     }
 }
