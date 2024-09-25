@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+        //Phân trang
+        Paginator::useBootstrapFive();
         //Sử dụng dữ liệu cho tất cả view
         view()->composer("*", function ($view) {
             //lấy danh mục
