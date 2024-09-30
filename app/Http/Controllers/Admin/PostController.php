@@ -28,7 +28,7 @@ class PostController extends Controller
     public function index()
     {
         //Phân trang
-        $posts = Post::query()->paginate(8);
+        $posts = Post::query()->latest('id')->paginate(8);
 
         return view('admin.posts.index', compact('posts'));
     }
