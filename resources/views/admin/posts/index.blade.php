@@ -14,7 +14,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Category Name</th>
                     <th scope="col">
-                        <a href="#" class="btn btn-primary">Create</a>
+                        <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create</a>
                     </th>
                 </tr>
             </thead>
@@ -27,9 +27,20 @@
                             <img src="{{ $post->image }}" width="60" alt="">
                         </td>
                         <td>{{ $post->description }}</td>
-                        <td>{{ $post->category_id }}</td>
-                        <td>
-                            Edit/Delete
+                        <td>{{ $post->category->name }}</td>
+                        <td class="d-flex">
+                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-primary mx-1">
+                                Edit
+                            </a>
+
+                            <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Bạn có chắc xóa không?')">
+                                    Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
