@@ -41,4 +41,24 @@ class PostController extends Controller
 
         return view('admin.posts.create', compact('categories'));
     }
+
+    //Tạo mới dữ liệu
+    public function store(Request $request)
+    {
+        $data = $request->except('image');
+
+        //Khi chưa có hình ảnh
+        $path = "";
+        //Khi có hình
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images');
+        }
+        //Đưa đường dẫn hình vào data
+        $data['image'] = $path;
+
+        //Insert data
+        Post::query()->create($data);
+
+        return redirect()->route('admin.posts.index')->with('message', 'Thêm dữ liệu thành công');
+    }
 }

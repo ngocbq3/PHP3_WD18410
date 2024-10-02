@@ -24,7 +24,7 @@
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $post->title }}</td>
                         <td>
-                            <img src="{{ $post->image }}" width="60" alt="">
+                            <img src="{{ asset('storage') . '/' . $post->image }}" width="60" alt="">
                         </td>
                         <td>{{ $post->description }}</td>
                         <td>{{ $post->category->name }}</td>

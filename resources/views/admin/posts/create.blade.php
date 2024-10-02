@@ -10,7 +10,7 @@
         </div>
         <div class="mb-3">
             <label for="">Image</label>
-            <input type="text" name="image" id="" class="form-control">
+            <input type="file" name="image" id="" class="form-control">
         </div>
         <div class="mb-3">
             <label for="">Description</label>
