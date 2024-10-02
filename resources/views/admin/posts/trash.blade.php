@@ -18,8 +18,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Category Name</th>
                     <th scope="col">
-                        <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create</a>
-                        <a href="{{ route('admin.post.trashed') }}" class="btn btn-primary">Trashed</a>
+
                     </th>
                 </tr>
             </thead>
@@ -34,8 +33,8 @@
                         <td>{{ $post->description }}</td>
                         <td>{{ $post->category->name }}</td>
                         <td class="d-flex">
-                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-primary mx-1">
-                                Edit
+                            <a href="{{ route('admin.posts.restore', $post->id) }}" class="btn btn-primary mx-1">
+                                Restore
                             </a>
 
                             <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">

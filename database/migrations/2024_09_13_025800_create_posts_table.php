@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image', 199);
             $table->text('description');
             $table->text('content');
+            $table->softDeletes();
             $table->bigInteger('category_id');
             $table->timestamps();
         });
