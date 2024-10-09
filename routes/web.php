@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\CheckAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -93,18 +96,30 @@ Route::get('/detail/{id}', [PostController::class, 'detail'])->name('page.detail
 
 
 //Admin
-Route::prefix('admin')->group(function () {
-    // Route::get('posts', [AdminPostController::class, 'test']);
-    Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
+Route::middleware([Authenticate::class, CheckAuth::class])->group(function () {
+    Route::prefix('admin')->group(function () {
+        // Route::get('posts', [AdminPostController::class, 'test']);
+        Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
 
-    Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
-    Route::post('/posts/create', [AdminPostController::class, 'store'])->name('admin.posts.store');
+        Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
+        Route::post('/posts/create', [AdminPostController::class, 'store'])->name('admin.posts.store');
 
-    Route::get('/posts/edit/{post}', [AdminPostController::class, 'edit'])->name('admin.posts.edit');
-    Route::put('/posts/edit/{post}', [AdminPostController::class, 'update'])->name('admin.posts.update');
+        Route::get('/posts/edit/{post}', [AdminPostController::class, 'edit'])->name('admin.posts.edit');
+        Route::put('/posts/edit/{post}', [AdminPostController::class, 'update'])->name('admin.posts.update');
 
-    Route::delete('/posts/delete/{post}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
+        Route::delete('/posts/delete/{post}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
 
-    Route::get('/posts/trashed', [AdminPostController::class, 'listPostTrash'])->name('admin.post.trashed');
-    Route::get('/posts/restore/{id}', [AdminPostController::class, 'restore'])->name('admin.posts.restore');
+        Route::get('/posts/trashed', [AdminPostController::class, 'listPostTrash'])->name('admin.post.trashed');
+        Route::get('/posts/restore/{id}', [AdminPostController::class, 'restore'])->name('admin.posts.restore');
+    });
 });
+
+
+//Login, register, logout
+Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+
+Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

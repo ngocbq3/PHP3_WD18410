@@ -33,19 +33,22 @@
                         </td>
                         <td>{{ $post->description }}</td>
                         <td>{{ $post->category->name }}</td>
-                        <td class="d-flex">
-                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-primary mx-1">
-                                Edit
-                            </a>
+                        <td>
+                            <div class="d-flex gap-1">
 
-                            <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có chắc xóa không?')">
-                                    Delete
-                                </button>
-                            </form>
+                                <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-primary mx-1">
+                                    Edit
+                                </a>
+
+                                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Bạn có chắc xóa không?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
